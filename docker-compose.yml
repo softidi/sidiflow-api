@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: postgresql-sidiflow-api
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data_sidiflow:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  pgadmin:
+    image: dpage/pgadmin4:9.17
+    container_name: pgadmin-sidiflow
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      TZ: ${TZ:-America/Mexico_City}
+    ports:
+      - "${PGADMIN_PORT}:80"
+    volumes:
+      - pgadmin_data_sidiflow:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  postgres_data_sidiflow:
+  pgadmin_data_sidiflow:
+
+
+
