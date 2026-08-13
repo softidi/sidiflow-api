@@ -18,3 +18,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+error:
+  resource:
+    not-found: Registro no encontrado.
+    already-exists: El registro ya existe.
