@@ -14,7 +14,7 @@ import java.time.Instant;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(name = "currency")
 public class Currency {
 
@@ -42,4 +42,9 @@ public class Currency {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
+    public Currency(String name, String code, String symbol) {
+        this.name = name;
+        this.code = code;
+        this.symbol = symbol;
+    }
 }
