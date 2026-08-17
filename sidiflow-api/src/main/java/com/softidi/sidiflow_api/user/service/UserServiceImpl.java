@@ -4,6 +4,8 @@ import com.softidi.sidiflow_api.currency.Currency;
 import com.softidi.sidiflow_api.currency.CurrencyRepository;
 import com.softidi.sidiflow_api.exception.ResourceAlreadyExistsException;
 import com.softidi.sidiflow_api.exception.ResourceNotFoundException;
+import com.softidi.sidiflow_api.role.Role;
+import com.softidi.sidiflow_api.role.RoleRepository;
 import com.softidi.sidiflow_api.user.User;
 import com.softidi.sidiflow_api.user.UserMapper;
 import com.softidi.sidiflow_api.user.UserRepository;
@@ -11,6 +13,8 @@ import com.softidi.sidiflow_api.user.UserStatus;
 import com.softidi.sidiflow_api.user.dto.UserCreateRequest;
 import com.softidi.sidiflow_api.user.dto.UserResponse;
 import com.softidi.sidiflow_api.user.dto.UserUpdateRequest;
+import com.softidi.sidiflow_api.user_role.UserRole;
+import com.softidi.sidiflow_api.user_role.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,11 +31,16 @@ public class UserServiceImpl implements UserService{
     private final CurrencyRepository currencyRepository;
     private final UserMapper mapper;
     private final PasswordEncoder passwordEncoder;
+    private final UserRoleRepository userRoleRepository;
+    private final RoleRepository roleRepository;
 
     @Value("${error.resource.not-found}")
     private String resourceNotFoundMessage;
     @Value("${error.resource.already-exists}")
     private String resourceAlreadyExistsMessage;
+
+    private final static Short STATUS_ACTIVE = 1;
+    private final static String ROLE_USER = "USER";
 
     @Override
     @Transactional(readOnly = true)
@@ -58,6 +67,14 @@ public class UserServiceImpl implements UserService{
         user.setPasswordHash(passwordEncoder.encode(request.password()));
         user.setDefaultCurrency(currency);
         User userSaved = repository.save(user);
+        Role roleUser = roleRepository.findByNameIgnoreCaseAndStatus(ROLE_USER, STATUS_ACTIVE)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException(resourceNotFoundMessage)
+                );
+        UserRole userRole = new UserRole();
+        userRole.setUser(userSaved);
+        userRole.setRole(roleUser);
+        userRoleRepository.save(userRole);
         return mapper.toResponse(userSaved);
     }
 

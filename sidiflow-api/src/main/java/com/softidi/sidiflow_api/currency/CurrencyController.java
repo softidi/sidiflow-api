@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,28 +21,33 @@ public class CurrencyController {
     private final CurrencyService service;
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<CurrencyResponse>> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/code/{code}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<CurrencyResponse> findByCode(@PathVariable String code){
         return ResponseEntity.ok(service.findByCode(code));
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CurrencyResponse> save(@Valid @RequestBody CurrencyRequest request){
         CurrencyResponse response = service.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CurrencyResponse> update(@PathVariable @Positive(message = "{validation.positive}") Long id,
                                                    @Valid @RequestBody CurrencyRequest request){
         return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable @Positive(message = "{validation.positive}") Long id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
