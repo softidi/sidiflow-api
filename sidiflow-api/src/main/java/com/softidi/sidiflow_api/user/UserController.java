@@ -1,9 +1,11 @@
 package com.softidi.sidiflow_api.user;
 
+import com.softidi.sidiflow_api.role.RoleResponse;
 import com.softidi.sidiflow_api.user.dto.UserCreateRequest;
 import com.softidi.sidiflow_api.user.dto.UserResponse;
 import com.softidi.sidiflow_api.user.dto.UserUpdateRequest;
 import com.softidi.sidiflow_api.user.service.UserService;
+import com.softidi.sidiflow_api.user_role.service.UserRoleService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService service;
+    private final UserRoleService userRoleService;
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll(){
@@ -46,6 +49,27 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable @Positive(message = "{validation.positive}") Long id){
         service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{userId}/roles")
+    public ResponseEntity<List<RoleResponse>> findRolesByUserId(@PathVariable
+                                                                    @Positive(message = "{validation.positive}")
+                                                                    @Valid Long userId){
+        return ResponseEntity.ok(userRoleService.findAllByUserId(userId));
+    }
+
+    @PostMapping("/{userId}/roles/{roleId}")
+    public ResponseEntity<Void> assignRole(@PathVariable @Positive(message = "{validation.positive}") @Valid Long userId,
+                                           @PathVariable @Positive(message = "{validation.positive}") @Valid Long roleId) {
+        userRoleService.assignRole(userId, roleId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{userId}/roles/{roleId}")
+    public ResponseEntity<Void> removeRole(@PathVariable @Positive(message = "{validation.positive}") @Valid Long userId,
+                                           @PathVariable @Positive(message = "{validation.positive}") @Valid Long roleId) {
+        userRoleService.removeRole(userId, roleId);
         return ResponseEntity.noContent().build();
     }
 }

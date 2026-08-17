@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    List<Role> findAllByStatus(Short status);
+    List<Role> findAllByStatusOrderByNameAsc(Short status);
     Optional<Role> findByIdAndStatus(Long id, Short status);
     Optional<Role> findByNameIgnoreCaseAndStatus(String name, Short status);
-    boolean existsByNameIgnoreCase(String name, Short status);
+    boolean existsByNameIgnoreCaseAndStatus(String name, Short status);
 }
