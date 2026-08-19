@@ -1,11 +1,11 @@
 package com.softidi.sidiflow_api.user;
 
-import com.softidi.sidiflow_api.role.RoleResponse;
+import com.softidi.sidiflow_api.role.dto.RoleResponse;
 import com.softidi.sidiflow_api.user.dto.UserCreateRequest;
 import com.softidi.sidiflow_api.user.dto.UserResponse;
 import com.softidi.sidiflow_api.user.dto.UserUpdateRequest;
 import com.softidi.sidiflow_api.user.service.UserService;
-import com.softidi.sidiflow_api.user_role.service.UserRoleService;
+import com.softidi.sidiflow_api.userrole.service.UserRoleService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;

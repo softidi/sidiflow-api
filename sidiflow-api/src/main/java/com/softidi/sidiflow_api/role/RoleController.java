@@ -1,5 +1,6 @@
 package com.softidi.sidiflow_api.role;
 
+import com.softidi.sidiflow_api.role.dto.RoleResponse;
 import com.softidi.sidiflow_api.role.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

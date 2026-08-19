@@ -1,4 +1,4 @@
-package com.softidi.sidiflow_api.user_role;
+package com.softidi.sidiflow_api.userrole;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

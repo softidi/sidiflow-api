@@ -1,4 +1,4 @@
-package com.softidi.sidiflow_api.user_role;
+package com.softidi.sidiflow_api.userrole;
 
 import com.softidi.sidiflow_api.role.Role;
 import com.softidi.sidiflow_api.user.User;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 

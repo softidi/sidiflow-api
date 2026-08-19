@@ -2,7 +2,7 @@ package com.softidi.sidiflow_api.role.service;
 
 import com.softidi.sidiflow_api.role.RoleMapper;
 import com.softidi.sidiflow_api.role.RoleRepository;
-import com.softidi.sidiflow_api.role.RoleResponse;
+import com.softidi.sidiflow_api.role.dto.RoleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

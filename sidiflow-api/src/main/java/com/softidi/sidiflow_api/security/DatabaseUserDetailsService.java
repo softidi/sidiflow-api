@@ -4,8 +4,8 @@ import com.softidi.sidiflow_api.role.Role;
 import com.softidi.sidiflow_api.user.User;
 import com.softidi.sidiflow_api.user.UserRepository;
 import com.softidi.sidiflow_api.user.UserStatus;
-import com.softidi.sidiflow_api.user_role.UserRole;
-import com.softidi.sidiflow_api.user_role.UserRoleRepository;
+import com.softidi.sidiflow_api.userrole.UserRole;
+import com.softidi.sidiflow_api.userrole.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,7 +47,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
                 .map(role -> new SimpleGrantedAuthority("ROLE_"+role))
                 .collect(Collectors.toList());
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
+                user.getUsername(),
                 user.getPasswordHash(),
                 authorities
         );

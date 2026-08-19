@@ -1,4 +1,4 @@
-package com.softidi.sidiflow_api.role;
+package com.softidi.sidiflow_api.role.dto;
 
 public record RoleResponse(
         Long id,

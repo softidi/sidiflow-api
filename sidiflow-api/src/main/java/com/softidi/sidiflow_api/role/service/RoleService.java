@@ -1,7 +1,6 @@
 package com.softidi.sidiflow_api.role.service;
 
-import com.softidi.sidiflow_api.role.Role;
-import com.softidi.sidiflow_api.role.RoleResponse;
+import com.softidi.sidiflow_api.role.dto.RoleResponse;
 
 import java.util.List;
 

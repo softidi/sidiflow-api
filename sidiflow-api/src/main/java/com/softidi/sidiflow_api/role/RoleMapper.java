@@ -1,5 +1,6 @@
 package com.softidi.sidiflow_api.role;
 
+import com.softidi.sidiflow_api.role.dto.RoleResponse;
 import org.springframework.stereotype.Component;
 
 @Component

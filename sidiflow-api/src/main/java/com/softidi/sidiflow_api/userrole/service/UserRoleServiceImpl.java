@@ -1,16 +1,16 @@
-package com.softidi.sidiflow_api.user_role.service;
+package com.softidi.sidiflow_api.userrole.service;
 
 import com.softidi.sidiflow_api.exception.ResourceAlreadyExistsException;
 import com.softidi.sidiflow_api.exception.ResourceNotFoundException;
 import com.softidi.sidiflow_api.role.Role;
 import com.softidi.sidiflow_api.role.RoleMapper;
 import com.softidi.sidiflow_api.role.RoleRepository;
-import com.softidi.sidiflow_api.role.RoleResponse;
+import com.softidi.sidiflow_api.role.dto.RoleResponse;
 import com.softidi.sidiflow_api.user.User;
 import com.softidi.sidiflow_api.user.UserRepository;
 import com.softidi.sidiflow_api.user.UserStatus;
-import com.softidi.sidiflow_api.user_role.UserRole;
-import com.softidi.sidiflow_api.user_role.UserRoleRepository;
+import com.softidi.sidiflow_api.userrole.UserRole;
+import com.softidi.sidiflow_api.userrole.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
