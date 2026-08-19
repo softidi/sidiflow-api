@@ -13,12 +13,14 @@ INSERT INTO currency (name, code, symbol) VALUES ('Libra esterlina', 'GBP', '£'
 -- ==================================================
 -- Table app_user
 -- ==================================================
-INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('admin', 'Admin', 'User', 'admin@local.com', '$2b$12$...', (SELECT id FROM currency WHERE code = 'MXN'));
-INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user1', 'User1', 'User1', 'user1@local.com', '$2b$12$...', (SELECT id FROM currency WHERE code = 'MXN'));
-INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user2', 'User2', 'User2', 'user2@local.com', '$2b$12$...', (SELECT id FROM currency WHERE code = 'MXN'));
-INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user3', 'User3', 'User3', 'user3@local.com', '$2b$12$...', (SELECT id FROM currency WHERE code = 'MXN'));
-INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user4', 'User4', 'User4', 'user4@local.com', '$2b$12$...', (SELECT id FROM currency WHERE code = 'MXN'));
-INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user5', 'User5', 'User5', 'user5@local.com', '$2b$12$...', (SELECT id FROM currency WHERE code = 'MXN'));
+
+-- datos solo para desarrollo, password_hash (user)
+INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('admin', 'Admin', 'User', 'admin@local.com', '$2a$10$448G6GQ07UfmztZSwvlt6ui2SAday2P4wlwTsDoyqJgSPAQZ5yH6m', (SELECT id FROM currency WHERE code = 'MXN'));
+INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user1', 'User1', 'User1', 'user1@local.com', '$2a$10$448G6GQ07UfmztZSwvlt6ui2SAday2P4wlwTsDoyqJgSPAQZ5yH6m', (SELECT id FROM currency WHERE code = 'MXN'));
+INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user2', 'User2', 'User2', 'user2@local.com', '$2a$10$448G6GQ07UfmztZSwvlt6ui2SAday2P4wlwTsDoyqJgSPAQZ5yH6m', (SELECT id FROM currency WHERE code = 'MXN'));
+INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user3', 'User3', 'User3', 'user3@local.com', '$2a$10$448G6GQ07UfmztZSwvlt6ui2SAday2P4wlwTsDoyqJgSPAQZ5yH6m', (SELECT id FROM currency WHERE code = 'MXN'));
+INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user4', 'User4', 'User4', 'user4@local.com', '$2a$10$448G6GQ07UfmztZSwvlt6ui2SAday2P4wlwTsDoyqJgSPAQZ5yH6m', (SELECT id FROM currency WHERE code = 'MXN'));
+INSERT INTO app_user (username, first_name, last_name, email, password_hash, default_currency_id) VALUES ('user5', 'User5', 'User5', 'user5@local.com', '$2a$10$448G6GQ07UfmztZSwvlt6ui2SAday2P4wlwTsDoyqJgSPAQZ5yH6m', (SELECT id FROM currency WHERE code = 'MXN'));
 
 -- ==================================================
 -- Table app_role
@@ -30,6 +32,7 @@ INSERT INTO app_role (name, description) VALUES ('user', 'Usuario normal');
 -- Table app_user_role
 -- ==================================================
 INSERT INTO app_user_role (user_id, role_id) VALUES ((SELECT id FROM app_user WHERE username = 'admin'), (SELECT id FROM app_role WHERE name = 'admin'));
+INSERT INTO app_user_role (user_id, role_id) VALUES ((SELECT id FROM app_user WHERE username = 'admin'), (SELECT id FROM app_role WHERE name = 'user'));
 INSERT INTO app_user_role (user_id, role_id) VALUES ((SELECT id FROM app_user WHERE username = 'user1'), (SELECT id FROM app_role WHERE name = 'user'));
 INSERT INTO app_user_role (user_id, role_id) VALUES ((SELECT id FROM app_user WHERE username = 'user2'), (SELECT id FROM app_role WHERE name = 'user'));
 INSERT INTO app_user_role (user_id, role_id) VALUES ((SELECT id FROM app_user WHERE username = 'user3'), (SELECT id FROM app_role WHERE name = 'user'));

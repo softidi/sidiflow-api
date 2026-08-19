@@ -22,3 +22,12 @@ error:
   resource:
     not-found: Registro no encontrado.
     already-exists: El registro ya existe.
+  username:
+    not-found: Datos incorrectos.
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      issuer: sidiflow-api
+      audience: ${JWT_AUDIENCE:sidiflow-api}
+      expiration-minutes: 15
